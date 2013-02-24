@@ -1,0 +1,1 @@
+#!/usr/bin/env ruby# file: send-to-switchboard.rbrequire 'xmpp-agent'require 'drb'class SendToSwitchboard  def self.start_service(user,password)    xa = XMPPAgent.new    Thread.new { xa.run(user, password)}    DRb.start_service nil, xa  end  def self.uri()  DRb.uri          end  def self.run()  DRb.thread.join  endend
